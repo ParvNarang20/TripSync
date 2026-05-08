@@ -81,19 +81,19 @@ TripSync/
 │   ├── assets/
 │   │   ├── hero.png
 │   │   ├── react.svg
-│   │   └── vite.svg
-│   │
+│   │   ├── vite.svg
+│   │   └── travelData.js
 │   ├── component/
 │   │   └── Navbar.jsx
-│   │
+│   │  
 │   ├── pages/
 │   │   ├── Home.jsx
 │   │   ├── Flights.jsx
 │   │   ├── Hotels.jsx
 │   │   ├── About.jsx
 │   │   ├── Login.jsx
-│   │   │──  Signup.jsx
-│   │   └── travelData.js
+│   │   └──  Signup.jsx
+│   │   
 │   │
 │   ├── App.jsx
 │   ├── App.css
