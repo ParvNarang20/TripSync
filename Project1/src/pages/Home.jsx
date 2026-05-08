@@ -1,95 +1,138 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { cities, getCityImage, getCityName } from "../data/travelData";
-
 function Home() {
+  const [from, setFrom] = useState("");
+  const [destination, setDestination] = useState("");
+
   const navigate = useNavigate();
-  const [trip, setTrip] = useState({ from: "Mumbai", to: "Delhi" });
 
-  const destination = getCityName(trip.to);
-  const backgroundImage = getCityImage(destination);
+  // Dynamic Background Images
+  const cityImages = {
+    delhi:
+      "https://images.unsplash.com/photo-1587474260584-136574528ed5",
 
-  const handleChange = (event) => {
-    setTrip({ ...trip, [event.target.name]: event.target.value });
+    mumbai:
+      "https://images.unsplash.com/photo-1595658658481-d53d3f999875",
+
+    goa:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   };
 
-  const openHotels = () => {
-    navigate("/hotels", { state: { city: destination } });
+  const backgroundImage =
+    cityImages[destination.toLowerCase()] ||
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e";
+
+  // Save city in localStorage
+  const handleHotels = () => {
+    localStorage.setItem("city", destination);
+    navigate("/hotels");
   };
 
-  const openFlights = () => {
-    navigate("/flights", {
-      state: { from: trip.from, city: destination },
-    });
+  const handleFlights = () => {
+    localStorage.setItem("city", destination);
+    navigate("/flights");
   };
 
   return (
-    <main className="hero-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <section className="hero-panel">
-        <p className="eyebrow">Plan smarter trips across India</p>
-        <h1>TripSync</h1>
-        <p className="hero-copy">
-          Search hotels and flights for real Indian destinations with clean,
-          ready-to-connect data.
-        </p>
+    <div
+      style={{
+        height: "100vh",
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          background: "rgba(0,0,0,0.5)",
+          padding: "30px",
+          borderRadius: "15px",
+          color: "white",
+          textAlign: "center",
+        }}
+      >
+        <h1>🌍 TripSync</h1>
 
-        <div className="search-row">
-          <label>
-            From
-            <input
-              list="city-options"
-              name="from"
-              placeholder="From city"
-              value={trip.from}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Input Section */}
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+            marginBottom: "20px",
+            justifyContent: "center",
+          }}
+        >
+          {/* FROM */}
+          <input
+            type="text"
+            placeholder="From"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            style={{
+              padding: "10px",
+              width: "200px",
+              borderRadius: "5px",
+              border: "none",
+            }}
+          />
 
-          <span className="route-mark" aria-hidden="true">
-            -
-          </span>
-
-          <label>
-            To
-            <input
-              list="city-options"
-              name="to"
-              placeholder="Destination"
-              value={trip.to}
-              onChange={handleChange}
-            />
-          </label>
-
-          <datalist id="city-options">
-            {cities.map((city) => (
-              <option key={city.name} value={city.name} />
-            ))}
-          </datalist>
+          {/* TO */}
+          <input
+            type="text"
+            placeholder="To"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
+            style={{
+              padding: "10px",
+              width: "200px",
+              borderRadius: "5px",
+              border: "none",
+            }}
+          />
         </div>
 
-        <div className="button-row">
-          <button className="primary-button" onClick={openHotels}>
-            View Hotels
+        {/* Buttons */}
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            onClick={handleHotels}
+            style={{
+              padding: "10px 20px",
+              background: "#00b4d8",
+              border: "none",
+              color: "white",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Hotels
           </button>
-          <button className="secondary-button" onClick={openFlights}>
-            View Flights
+
+          <button
+            onClick={handleFlights}
+            style={{
+              padding: "10px 20px",
+              background: "#0077b6",
+              border: "none",
+              color: "white",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Flights
           </button>
         </div>
-
-        <div className="city-strip">
-          {cities.slice(0, 5).map((city) => (
-            <button
-              key={city.name}
-              className={city.name === destination ? "city-chip active" : "city-chip"}
-              onClick={() => setTrip({ ...trip, to: city.name })}
-            >
-              {city.name}
-            </button>
-          ))}
-        </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }
 
