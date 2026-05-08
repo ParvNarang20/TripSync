@@ -6,6 +6,7 @@ function About() {
       margin: "auto",
       fontFamily: "Arial, sans-serif"
     }}>
+
       <h1 style={{
         textAlign: "center",
         color: "#0d1b2a",
@@ -13,6 +14,7 @@ function About() {
       }}>
         About TripSync
       </h1>
+
 
       <p style={{
         textAlign: "center",
@@ -24,6 +26,7 @@ function About() {
         explore flights, hotels, and cab options all in one place.
         It is designed to make your travel planning faster, easier, and smarter.
       </p>
+
 
       <div style={{
         display: "grid",
@@ -44,11 +47,7 @@ function About() {
           <p>Discover comfortable stays at affordable prices.</p>
         </div>
 
-        <div style={cardStyle}>
-          🚗
-          <h3>Cabs</h3>
-          <p>Book transport quickly for a smooth journey.</p>
-        </div>
+    
 
         <div style={cardStyle}>
           ⚡
@@ -70,6 +69,7 @@ function About() {
         </p>
       </div>
 
+
       <p style={{
         marginTop: "40px",
         textAlign: "center",
@@ -82,6 +82,7 @@ function About() {
     </div>
   );
 }
+
 
 const cardStyle = {
   background: "#ffffff",
