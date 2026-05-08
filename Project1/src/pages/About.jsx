@@ -6,8 +6,6 @@ function About() {
       margin: "auto",
       fontFamily: "Arial, sans-serif"
     }}>
-
-      {/* Heading */}
       <h1 style={{
         textAlign: "center",
         color: "#0d1b2a",
@@ -16,7 +14,6 @@ function About() {
         About TripSync
       </h1>
 
-      {/* Intro */}
       <p style={{
         textAlign: "center",
         fontSize: "18px",
@@ -28,7 +25,6 @@ function About() {
         It is designed to make your travel planning faster, easier, and smarter.
       </p>
 
-      {/* Cards Section */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -62,7 +58,6 @@ function About() {
 
       </div>
 
-      {/* Extra Section */}
       <div style={{
         marginTop: "50px",
         textAlign: "center"
@@ -75,7 +70,6 @@ function About() {
         </p>
       </div>
 
-      {/* Footer */}
       <p style={{
         marginTop: "40px",
         textAlign: "center",
@@ -89,7 +83,6 @@ function About() {
   );
 }
 
-// Card styling (clean reusable)
 const cardStyle = {
   background: "#ffffff",
   padding: "20px",
