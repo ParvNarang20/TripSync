@@ -1,66 +1,68 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
+import travelData from "./travelData";
 
-import { getCityName } from "../data/travelData";
-import { getHotels } from "../services/travelApi";
+const Hotels = () => {
+  const city = localStorage.getItem("city") || "Delhi";
 
-function Hotels() {
-  const location = useLocation();
-  const selectedCity = getCityName(location.state?.city);
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadHotels() {
-      setLoading(true);
-      try {
-        const data = await getHotels(selectedCity);
-        setHotels(data);
-      } catch (error) {
-        console.error(error);
-        setHotels([]);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadHotels();
-  }, [selectedCity]);
+  const hotels = travelData.hotels[city] || [];
 
   return (
-    <main className="page-shell">
-      <section className="page-heading">
-        <p className="eyebrow">Hotels</p>
-        <h1>Stays in {selectedCity}</h1>
-        <p>More cards, real destination names, local areas, ratings, and prices.</p>
-      </section>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Hotels in {city}</h1>
 
-      {loading ? (
-        <p className="empty-state">Loading hotels...</p>
-      ) : hotels.length ? (
-        <section className="card-grid">
-          {hotels.map((hotel) => (
-            <article className="travel-card" key={`${hotel.name}-${hotel.area}`}>
-              <div>
-                <span className="pill">{hotel.tag}</span>
-                <h2>{hotel.name}</h2>
-                <p>{hotel.area}, {selectedCity}</p>
-              </div>
+      {hotels.length > 0 ? (
+        <div style={styles.cardContainer}>
+          {hotels.map((hotel, index) => (
+            <div key={index} style={styles.card}>
+              <h2>{hotel.name}</h2>
 
-              <div className="meta-row">
-                <span>Rating {hotel.rating}</span>
-                <strong>Rs {hotel.price.toLocaleString("en-IN")}</strong>
-              </div>
+              <p>Price: ₹{hotel.price}</p>
 
-              <button className="primary-button full">Book Now</button>
-            </article>
+              <p>Rating: ⭐ {hotel.rating}</p>
+
+              <button style={styles.button}>Book Now</button>
+            </div>
           ))}
-        </section>
+        </div>
       ) : (
-        <p className="empty-state">No hotels found for {selectedCity}.</p>
+        <h2>No Hotels Found</h2>
       )}
-    </main>
+    </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    padding: "20px",
+    fontFamily: "Arial",
+  },
+
+  heading: {
+    textAlign: "center",
+    marginBottom: "30px",
+  },
+
+  cardContainer: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+  },
+
+  card: {
+    border: "1px solid gray",
+    borderRadius: "10px",
+    padding: "20px",
+  },
+
+  button: {
+    marginTop: "10px",
+    width: "100%",
+    padding: "10px",
+    border: "none",
+    background: "black",
+    color: "white",
+    cursor: "pointer",
+  },
+};
 
 export default Hotels;
