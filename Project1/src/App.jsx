@@ -4,7 +4,6 @@ import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import Hotels from "./pages/Hotels";
 import Flights from "./pages/Flights";
-import Cabs from "./pages/Cabs";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -17,7 +16,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/flights" element={<Flights />} />
-        <Route path="/cabs" element={<Cabs />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
