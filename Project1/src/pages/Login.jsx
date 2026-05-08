@@ -1,55 +1,82 @@
 import { useState } from "react";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const userData = {
-      email,
-      password,
-    };
-
-    console.log(userData);
+    console.log(user);
     alert("Login Successful ✅");
   };
 
   return (
-    <main className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
+    <div style={container}>
+      <form onSubmit={handleSubmit} style={card}>
         <h2>Login</h2>
-        <p>Welcome back. Continue planning your trip.</p>
 
-        <label>
-          Email
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          value={user.email}
+          onChange={handleChange}
+          style={input}
+        />
 
-        <label>
-          Password
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          value={user.password}
+          onChange={handleChange}
+          style={input}
+        />
 
-        <button className="primary-button full" type="submit">
-          Login
-        </button>
+        <button style={button}>Login</button>
       </form>
-    </main>
+    </div>
   );
 }
 
 export default Login;
+
+// Styles
+const container = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "80vh",
+};
+
+const card = {
+  padding: "30px",
+  width: "300px",
+  borderRadius: "12px",
+  textAlign: "center",
+  background: "#fff"
+};
+
+const input = {
+  width: "100%",
+  padding: "10px",
+  margin: "10px 0",
+  borderRadius: "8px",
+  border: "1px solid #ccc"
+};
+
+const button = {
+  width: "100%",
+  padding: "10px",
+  background: "#0d1b2a",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer"
+};
