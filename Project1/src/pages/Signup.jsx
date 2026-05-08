@@ -15,14 +15,14 @@ function Signup() {
     };
 
     console.log(userData);
-    alert("Signup Successful");
+    alert("Signup Successful ✅");
   };
 
   return (
     <main className="auth-page">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h2>Signup</h2>
-        <p>Create your TripSync account in a few seconds.</p>
+        <p>Create your TripSync account in just few seconds.</p>
 
         <label>
           Name
