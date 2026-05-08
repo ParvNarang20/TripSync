@@ -84,9 +84,7 @@ TripSync/
 │   │   └── vite.svg
 │   │
 │   ├── component/
-│   │   ├── Navbar.jsx
-│   │   ├── Map.jsx
-│   │   └── Result.jsx
+│   │   └── Navbar.jsx
 │   │
 │   ├── pages/
 │   │   ├── Home.jsx
@@ -94,7 +92,8 @@ TripSync/
 │   │   ├── Hotels.jsx
 │   │   ├── About.jsx
 │   │   ├── Login.jsx
-│   │   └── Signup.jsx
+│   │   │──  Signup.jsx
+│   │   └── travelData.js
 │   │
 │   ├── App.jsx
 │   ├── App.css
