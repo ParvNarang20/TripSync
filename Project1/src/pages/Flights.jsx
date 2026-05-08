@@ -1,74 +1,72 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
+import travelData from "./travelData";
 
-import { cities, getCityName } from "../data/travelData";
-import { getFlights } from "../services/travelApi";
+const Flights = () => {
+  const city = localStorage.getItem("city") || "Delhi";
 
-function Flights() {
-  const location = useLocation();
-  const selectedCity = getCityName(location.state?.city);
-  const fromCity = location.state?.from || "";
-  const airportCode = cities.find((city) => city.name === selectedCity)?.airport;
-  const [flights, setFlights] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadFlights() {
-      setLoading(true);
-      try {
-        const data = await getFlights({ from: fromCity, to: selectedCity });
-        setFlights(data);
-      } catch (error) {
-        console.error(error);
-        setFlights([]);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadFlights();
-  }, [fromCity, selectedCity]);
+  const flights = travelData.flights[city] || [];
 
   return (
-    <main className="page-shell">
-      <section className="page-heading">
-        <p className="eyebrow">Flights</p>
-        <h1>Flights to {selectedCity} {airportCode && `(${airportCode})`}</h1>
-        <p>Flight cards now include route, flight number, timing, and fare.</p>
-      </section>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Flights to {city}</h1>
 
-      {loading ? (
-        <p className="empty-state">Loading flights...</p>
-      ) : flights.length ? (
-        <section className="card-grid">
-          {flights.map((flight) => (
-            <article className="travel-card" key={flight.flightNo}>
-              <div>
-                <span className="pill">{flight.flightNo}</span>
-                <h2>{flight.airline}</h2>
-                <p>{flight.from} to {flight.to}</p>
-              </div>
+      {flights.length > 0 ? (
+        <div style={styles.cardContainer}>
+          {flights.map((flight, index) => (
+            <div key={index} style={styles.card}>
+              <h2>{flight.airline}</h2>
 
-              <div className="time-row">
-                <span>{flight.depart}</span>
-                <span className="line" />
-                <span>{flight.arrive}</span>
-              </div>
+              <p>
+                {flight.from} → {flight.to}
+              </p>
 
-              <div className="meta-row">
-                <span>Non-stop</span>
-                <strong>Rs {flight.price.toLocaleString("en-IN")}</strong>
-              </div>
+              <p>Departure: {flight.time}</p>
 
-              <button className="primary-button full">Book Flight</button>
-            </article>
+              <p>Price: ₹{flight.price}</p>
+
+              <button style={styles.button}>Book Flight</button>
+            </div>
           ))}
-        </section>
+        </div>
       ) : (
-        <p className="empty-state">No flights found for {selectedCity}.</p>
+        <h2>No Flights Available</h2>
       )}
-    </main>
+    </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    padding: "20px",
+    fontFamily: "Arial",
+  },
+
+  heading: {
+    textAlign: "center",
+    marginBottom: "30px",
+  },
+
+  cardContainer: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+  },
+
+  card: {
+    border: "1px solid gray",
+    borderRadius: "10px",
+    padding: "20px",
+  },
+
+  button: {
+    marginTop: "10px",
+    width: "100%",
+    padding: "10px",
+    border: "none",
+    background: "black",
+    color: "white",
+    cursor: "pointer",
+  },
+};
 
 export default Flights;
