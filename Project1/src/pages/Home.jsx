@@ -7,7 +7,7 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // Dynamic Background Images
+
   const cityImages = {
     delhi:
       "https://images.unsplash.com/photo-1587474260584-136574528ed5",
@@ -23,7 +23,7 @@ function Home() {
     cityImages[destination.toLowerCase()] ||
     "https://images.unsplash.com/photo-1507525428034-b723cf961d3e";
 
-  // Save city in localStorage
+
   const handleHotels = () => {
     localStorage.setItem("city", destination);
     navigate("/hotels");
@@ -57,7 +57,7 @@ function Home() {
       >
         <h1>🌍 TripSync</h1>
 
-        {/* Input Section */}
+
         <div
           style={{
             display: "flex",
@@ -66,7 +66,7 @@ function Home() {
             justifyContent: "center",
           }}
         >
-          {/* FROM */}
+
           <input
             type="text"
             placeholder="From"
@@ -95,7 +95,7 @@ function Home() {
           />
         </div>
 
-        {/* Buttons */}
+
         <div
           style={{
             display: "flex",
