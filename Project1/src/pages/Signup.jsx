@@ -14,7 +14,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
-    alert("Signup Successful 🎉");
+    alert("Signup Successful ✅");
   };
 
   return (
@@ -57,7 +57,6 @@ function Signup() {
 
 export default Signup;
 
-// same styles reuse
 const container = {
   display: "flex",
   justifyContent: "center",
