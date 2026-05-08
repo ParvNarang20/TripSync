@@ -47,7 +47,6 @@ function Login() {
 
 export default Login;
 
-// Styles
 const container = {
   display: "flex",
   justifyContent: "center",
