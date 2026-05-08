@@ -64,7 +64,7 @@ function About() {
         <h2 style={{ color: "#0d1b2a" }}>Our Mission</h2>
         <p style={{ maxWidth: "700px", margin: "10px auto", color: "#555" }}>
           Our goal is to simplify travel planning by bringing everything
-          together in one platform. Whether you're booking a quick trip or
+          together in one platform. Whether you're booking a quick Trip or
           planning a vacation, TripSync helps you stay organized.
         </p>
       </div>
@@ -76,7 +76,7 @@ function About() {
         fontSize: "14px",
         color: "gray"
       }}>
-        © 2026 TripSync | Built with React 🚀
+        © 2026 TripSync | Built with React. 
       </p>
 
     </div>
