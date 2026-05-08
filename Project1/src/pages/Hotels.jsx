@@ -1,5 +1,5 @@
 import React from "react";
-import travelData from "./travelData";
+import travelData from "../assets/travelData";
 
 const Hotels = () => {
   const city = localStorage.getItem("city") || "Delhi";
